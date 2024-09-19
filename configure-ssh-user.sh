@@ -25,10 +25,11 @@ if [ -n "$AUTHORIZED_KEYS" ]; then
 fi
 
 # Setup Tailscale
-# https://tailscale.com/kb/1132/flydotio
+# https://tailscale.com/kb/1107/heroku
 # tailscale status --peers=false --json | grep -q 'Online.*true' # https://github.com/tailscale/tailscale/issues/12758
-tailscaled --state=/var/lib/tailscale/tailscaled.state --socket=/var/run/tailscale/tailscaled.sock &
-tailscale up --authkey=${TS_AUTHKEY} --hostname=${TS_HOSTNAME} --advertise-exit-node=true --ssh=true --webclient=true --accept-dns --advertise-tags=tag:ci
+tailscaled --tun=userspace-networking --socks5-server=localhost:1055 &
+tailscale up --authkey=${TS_AUTHKEY} --hostname=${TS_HOSTNAME} --advertise-exit-node=true --ssh=true --accept-dns --advertise-tags=tag:ci
+tailscale set --webclient=true
 
 # Start the SSH server
-exec /usr/sbin/sshd -D
+ALL_PROXY=socks5://localhost:1055/ exec /usr/sbin/sshd -D

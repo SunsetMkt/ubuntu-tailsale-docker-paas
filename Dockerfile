@@ -15,7 +15,7 @@ ENV LANG en_US.utf8
 RUN apt-get install -y wget tar unzip zip curl git sudo gnupg sqlite3 tzdata ca-certificates iptables
 
 # Install Tailscale
-# https://tailscale.com/kb/1132/flydotio
+# https://tailscale.com/kb/1107/heroku
 # Copy Tailscale binaries from the tailscale image on Docker Hub.
 # COPY --from=docker.io/tailscale/tailscale:stable /usr/local/bin/tailscaled /usr/local/bin/tailscaled
 # COPY --from=docker.io/tailscale/tailscale:stable /usr/local/bin/tailscale /usr/local/bin/tailscale
@@ -40,7 +40,7 @@ RUN if ! id -u $SSH_USERNAME > /dev/null 2>&1; then useradd -ms /bin/bash $SSH_U
 # Set up SSH configuration
 RUN mkdir -p /home/$SSH_USERNAME/.ssh && chown $SSH_USERNAME:$SSH_USERNAME /home/$SSH_USERNAME/.ssh \
     && echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config \
-    && echo "PermitRootLogin no" >> /etc/ssh/sshd_config
+    && echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 
 # Copy the script to configure the user's password and authorized keys
 COPY configure-ssh-user.sh /usr/local/bin/
