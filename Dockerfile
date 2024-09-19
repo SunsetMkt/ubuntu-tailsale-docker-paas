@@ -17,7 +17,7 @@ ENV LANGUAGE en_US:en
 # Install tools
 RUN apt-get install -y wget tar unzip zip curl git sudo gnupg sqlite3 tzdata ca-certificates iptables \
     software-properties-common apt-transport-https vim nano net-tools xvfb php npm supervisor build-essential \
-    dotnet-sdk-8.0 default-jdk python3 python3-pip traceroute nmap
+    dotnet-sdk-8.0 default-jdk python3 python3-pip traceroute nmap tmux tmate
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 # Install Tailscale
