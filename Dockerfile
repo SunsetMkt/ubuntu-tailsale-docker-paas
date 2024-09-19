@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 
 # unminimize
-RUN unminimize
+# RUN unminimize # Not found
 
 # Set locales
 RUN apt-get install -y locales
