@@ -15,7 +15,10 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en     
 
 # Install tools
-RUN apt-get install -y wget tar unzip zip curl git sudo gnupg sqlite3 tzdata ca-certificates iptables
+RUN apt-get install -y wget tar unzip zip curl git sudo gnupg sqlite3 tzdata ca-certificates iptables \
+    software-properties-common apt-transport-https vim nano net-tools xvfb php npm supervisor build-essential \
+    dotnet-sdk-8.0 default-jdk python3-pip
+RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 # Install Tailscale
 # https://tailscale.com/kb/1107/heroku
