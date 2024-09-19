@@ -47,13 +47,5 @@ unset SSH_USERNAME
 unset PASSWORD
 unset AUTHORIZED_KEYS
 
-# An attempt to logout on exit
-cleanup() {
-    echo "Got SIGTERM..."
-    tailscale logout
-    exit 0
-}
-trap cleanup SIGTERM
-
 # Start the SSH server
 exec /usr/sbin/sshd -D
