@@ -12,7 +12,7 @@ RUN apt-get install -y locales && localedef -i en_US -c -f UTF-8 -A /usr/share/l
 ENV LANG en_US.utf8
 
 # Install tools
-RUN apt-get install -y wget tar unzip zip curl git sudo gnupg sqlite3 tzdata ca-certificates iptables ip6tables
+RUN apt-get install -y wget tar unzip zip curl git sudo gnupg sqlite3 tzdata ca-certificates iptables
 
 # Install Tailscale
 # https://tailscale.com/kb/1132/flydotio
