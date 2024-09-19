@@ -8,6 +8,7 @@ RUN apt-get update
 
 # unminimize
 # RUN unminimize # Not found
+RUN apt-get install -y ubuntu-server
 
 # Set locales
 RUN apt-get install -y locales
