@@ -7,8 +7,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 
 # unminimize
+RUN apt-get install unminimize
+RUN yes | unminimize
+RUN apt-get -y upgrade
 # RUN unminimize # Not found
-RUN apt-get install -y ubuntu-server
+# RUN apt-get install -y ubuntu-server
 
 # Set locales
 RUN apt-get install -y locales
