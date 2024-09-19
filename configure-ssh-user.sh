@@ -34,7 +34,9 @@ fi
 # https://tailscale.com/kb/1107/heroku
 tailscaled --tun=userspace-networking --socks5-server=localhost:1055 --state=mem: &
 tailscale up --authkey="${TS_AUTHKEY}?preauthorized=true&ephemeral=true" --hostname=${TS_HOSTNAME} --advertise-exit-node=true --ssh=true --accept-dns --advertise-tags=tag:container
-tailscale set --webclient=true
+tailscale set --webclient=true --auto-update=true --posture-checking=true
+tailscale down
+tailscale up
 ALL_PROXY=socks5://localhost:1055/
 export ALL_PROXY
 
