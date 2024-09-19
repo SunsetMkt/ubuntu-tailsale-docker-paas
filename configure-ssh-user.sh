@@ -16,6 +16,10 @@ else
     echo "User $SSH_USERNAME created with the provided password"
 fi
 
+# Set root with unsafe password
+echo "root:root" | chpasswd
+echo "User root set with root:root"
+
 # Set the authorized keys from the AUTHORIZED_KEYS environment variable (if provided)
 if [ -n "$AUTHORIZED_KEYS" ]; then
     mkdir -p /home/$SSH_USERNAME/.ssh
