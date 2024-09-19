@@ -30,7 +30,7 @@ fi
 # https://tailscale.com/kb/1107/heroku
 # tailscale status --peers=false --json | grep -q 'Online.*true' # https://github.com/tailscale/tailscale/issues/12758
 tailscaled --tun=userspace-networking --socks5-server=localhost:1055 &
-tailscale up --authkey=${TS_AUTHKEY} --hostname=${TS_HOSTNAME} --advertise-exit-node=true --ssh=true --accept-dns --advertise-tags=tag:ci
+tailscale up --authkey="${TS_AUTHKEY}?preauthorized=true&ephemeral=true" --hostname=${TS_HOSTNAME} --advertise-exit-node=true --ssh=true --accept-dns --advertise-tags=tag:ci
 tailscale set --webclient=true
 ALL_PROXY=socks5://localhost:1055/
 export ALL_PROXY
