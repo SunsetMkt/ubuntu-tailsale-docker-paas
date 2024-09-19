@@ -35,5 +35,12 @@ tailscale set --webclient=true
 ALL_PROXY=socks5://localhost:1055/
 export ALL_PROXY
 
+# Unset ENVs
+unset TS_HOSTNAME
+unset TS_AUTHKEY
+unset SSH_USERNAME
+unset PASSWORD
+unset AUTHORIZED_KEYS
+
 # Start the SSH server
 exec /usr/sbin/sshd -D
