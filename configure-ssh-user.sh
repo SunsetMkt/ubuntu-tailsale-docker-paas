@@ -24,5 +24,11 @@ if [ -n "$AUTHORIZED_KEYS" ]; then
     echo "Authorized keys set for user $SSH_USERNAME"
 fi
 
+# Setup Tailscale
+# https://tailscale.com/kb/1132/flydotio
+# tailscale status --peers=false --json | grep -q 'Online.*true' # https://github.com/tailscale/tailscale/issues/12758
+tailscaled --state=/var/lib/tailscale/tailscaled.state --socket=/var/run/tailscale/tailscaled.sock &
+tailscale up --authkey=${TS_AUTHKEY} --hostname=${TS_HOSTNAME} --advertise-exit-node=true --ssh=true --webclient=true --accept-dns --advertise-tags=tag:ci
+
 # Start the SSH server
 exec /usr/sbin/sshd -D

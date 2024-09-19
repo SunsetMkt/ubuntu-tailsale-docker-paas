@@ -12,7 +12,15 @@ RUN apt-get install -y locales && localedef -i en_US -c -f UTF-8 -A /usr/share/l
 ENV LANG en_US.utf8
 
 # Install tools
-RUN apt-get install -y wget tar unzip zip curl git sudo gnupg sqlite3 tzdata
+RUN apt-get install -y wget tar unzip zip curl git sudo gnupg sqlite3 tzdata ca-certificates iptables ip6tables
+
+# Install Tailscale
+# https://tailscale.com/kb/1132/flydotio
+# Copy Tailscale binaries from the tailscale image on Docker Hub.
+# COPY --from=docker.io/tailscale/tailscale:stable /usr/local/bin/tailscaled /usr/local/bin/tailscaled
+# COPY --from=docker.io/tailscale/tailscale:stable /usr/local/bin/tailscale /usr/local/bin/tailscale
+# RUN mkdir -p /var/run/tailscale /var/cache/tailscale /var/lib/tailscale
+RUN curl -fsSL https://tailscale.com/install.sh | sh
 
 # https://github.com/aoudiamoncef/ubuntu-sshd
 ENV SSH_USERNAME=ubuntu
