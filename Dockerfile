@@ -7,9 +7,12 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 
 # Set locales
-# https://hub.docker.com/_/ubuntu
-RUN apt-get install -y locales && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-ENV LANG en_US.utf8
+RUN apt-get install -y locales
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    locale-gen
+ENV LC_ALL en_US.UTF-8 
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en     
 
 # Install tools
 RUN apt-get install -y wget tar unzip zip curl git sudo gnupg sqlite3 tzdata ca-certificates iptables
