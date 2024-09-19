@@ -8,6 +8,8 @@
 # Create the user with the provided username and set the password
 if id "$SSH_USERNAME" &>/dev/null; then
     echo "User $SSH_USERNAME already exists"
+    echo "$SSH_USERNAME:$PASSWORD" | chpasswd
+    echo "User $SSH_USERNAME set with the provided password"
 else
     useradd -ms /bin/bash "$SSH_USERNAME"
     echo "$SSH_USERNAME:$PASSWORD" | chpasswd
@@ -30,6 +32,8 @@ fi
 tailscaled --tun=userspace-networking --socks5-server=localhost:1055 &
 tailscale up --authkey=${TS_AUTHKEY} --hostname=${TS_HOSTNAME} --advertise-exit-node=true --ssh=true --accept-dns --advertise-tags=tag:ci
 tailscale set --webclient=true
+ALL_PROXY=socks5://localhost:1055/
+export ALL_PROXY
 
 # Start the SSH server
-ALL_PROXY=socks5://localhost:1055/ exec /usr/sbin/sshd -D
+exec /usr/sbin/sshd -D
