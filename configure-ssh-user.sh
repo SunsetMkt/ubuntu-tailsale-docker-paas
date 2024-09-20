@@ -37,8 +37,7 @@ tailscale up --authkey="${TS_AUTHKEY}?preauthorized=true&ephemeral=true" --hostn
 tailscale set --webclient=true --auto-update=true --posture-checking=true
 tailscale down
 tailscale up
-ALL_PROXY=socks5://localhost:1055/
-export ALL_PROXY
+export ALL_PROXY=socks5://localhost:1055/
 
 # Unset ENVs
 unset TS_HOSTNAME
