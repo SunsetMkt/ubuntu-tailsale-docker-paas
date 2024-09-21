@@ -9,9 +9,9 @@ RUN apt-get update
 # unminimize
 RUN apt-get install unminimize
 RUN yes | unminimize
+RUN apt-get install -y ubuntu-server man-db
 RUN apt-get -y upgrade
 # RUN unminimize # Not found
-# RUN apt-get install -y ubuntu-server
 
 # Set locales
 RUN apt-get install -y locales
